@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PelículasApp | Aplicación de gestión de películas</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container py-4">
+    <div class="card bg-light">
+        <div class="card-header" th:text="${titulo}"></div>
+        <div class="card-body">
+
+            <img th:if="${#strings.length(pelicula.imagen) > 0}" class="img-thumbnail rounded float-left"
+                 style="max-width: 25%;" th:src="@{'/ccursos/uploads/' + ${pelicula.imagen}}"
+                 th:alt="${pelicula.imagen}" />
+
+            <ul class="list-group">
+                <li class="list-group-item active" th:text="${pelicula.idPelicula}"></li>
+                <li class="list-group-item" th:text="${pelicula.titulo}"></li>
+                <li class="list-group-item" th:text="${pelicula.duracion}"></li>
+                <li class="list-group-item" th:text="${pelicula.director}"></li>
+                <li class="list-group-item" th:text="${pelicula.anno}"></li>
+                <li class="list-group-item" th:text="${pelicula.genero}"></li>
+                <li class="list-group-item" th:text="${pelicula.pais}"></li>
+                <li class="list-group-item" th:text="${pelicula.sinopsis}"></li>
+            </ul>
+
+        </div>
+    </div>
+    <hr>
+    <a class="btn btn-primary" role="button" th:href="@{/cpeliculas/listado}">Volver al listado de películas</a>
+</div>
+
+</body>
+</html>

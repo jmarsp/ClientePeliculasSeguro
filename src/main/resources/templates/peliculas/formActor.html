@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PelículasApp | Aplicación de gestión de peliculas</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h2 th:text="${titulo}"
+        class="text-secondary border border-success border-top-0 border-left-0 border-right-0"></h2>
+    <form th:action="@{/cactores/guardar/}" method="post" th:object="${actor}" enctype="multipart/form-data">
+        <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
+            Por favor corrija los siguientes errores:
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+            </ul>
+        </div>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre"
+                   placeholder="Escriba el nombre del actor" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="fechaNacimiento" class="form-label">Fecha Nacimiento</label>
+            <input type="text" class="form-control" th:field="*{fechaNacimiento}" id="fechaNacimiento" name="fechaNacimiento"
+                   placeholder="Escriba la fecha de nacimiento del actor en formato yyyy-mm-dd" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="paisNacimiento" class="form-label">Pais Nacimiento</label>
+            <input type="text" class="form-control" th:field="*{paisNacimiento}" id="paisNacimiento" name="paisNacimiento"
+                   placeholder="Escriba el país de nacimiento del actor" required="required">
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <!--Para que no se ejecuten los titulos de las peliculas ni los input cuando el formulario edita
+                        están los if del título y los input
+                        Si el formulario es para editar se ejecutan para qeu se vean las peliculas
+                        y se graben al actualizar -->
+                 <td th:if="${#strings.toString(titulo) !='Nuevo actor'}" > Titulo Peliculas</td>
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pelicula, itemStat : *{peliculas}">
+                <td th:if="${#strings.length(pelicula.titulo) > 0}" ><input th:readonly th:field="*{peliculas[__${itemStat.index}__].titulo}" /></td>
+                <td th:if="${#strings.length(pelicula.titulo) > 0}" ><input type="hidden" th:field="*{peliculas[__${itemStat.index}__].idPelicula}" /></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-dark">Guardar</button>
+        <input type="hidden" th:field="*{idActor}"/>
+    </form>
+    <hr>
+    <a class="btn btn-primary" role="button" th:href="@{/cpeliculas/}">Ir a Inicio</a>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

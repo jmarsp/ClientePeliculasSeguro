@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PeliculasApp | Aplicación de gestión de peliculas</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h2 class="text-secondary border border-success border-top-0 border-left-0 border-right-0">Búsqueda de Peliculas</h2>
+    <form th:action="@{/cpeliculas/titulo}" method="get">
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo"
+                   placeholder="Escriba el título de la película">
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar por Título</button>
+    </form>
+    <hr>
+    <form th:action="@{/cpeliculas/genero}" method="get">
+        <div class="mb-3">
+            <select class="form-select" name="genero" id="genero">
+                <!-- <option selected>Seleccionar Genero</option> -->
+                <option th:value="Thriller">Thriller</option>
+                <option th:value="Mafia">Mafia</option>
+                <option th:value="Comedia">Comedia</option>
+                <option th:value="Terror">Terror</option>
+                <option th:value="Aventuras">Aventuras</option>
+                <option th:value="Romantica">Romántica</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar por Género</button>
+    </form>
+    <hr>
+    <form th:action="@{/cpeliculas/director}" method="get">
+        <div class="mb-3">
+            <label for="director" class="form-label">Nombre del Director</label>
+            <input type="text" class="form-control" id="director" name="director"
+                   placeholder="Escriba el nombre del director de la película">
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar por Director</button>
+    </form>
+    <hr>
+    <hr>
+    <form th:action="@{/cactores/actor}" method="get">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del Actor</label>
+            <input type="text" class="form-control" id="nombre" name="nombre"
+                   placeholder="Escriba el nombre del actor de la película">
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar por Actor</button>
+    </form>
+    <hr>
+    <a class="btn btn-primary" role="button" th:href="@{/cpeliculas}">Ir a Inicio</a>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
